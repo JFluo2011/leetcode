@@ -21,10 +21,19 @@ class Solution(object):
             return [nums[first], nums[end]]
         return self.sum(nums, first, end, target)
 
+    def better(self, nums, target):
+        d = dict()
+        for index, value in enumerate(nums):
+            diff = target - value
+            if diff in d:
+                return d[diff], index
+            d[value] = index
+
 
 def main():
     solution = Solution()
-    print(solution.twoSum([0,4,3,0], 0))
+    print(solution.better([0, 4, 3, 0], 0))
+    print(solution.better([3, 2, 4], 6))
 
 
 if __name__ == '__main__':
