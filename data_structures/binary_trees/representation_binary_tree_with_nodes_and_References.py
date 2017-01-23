@@ -32,6 +32,31 @@ class BinaryTree:
     def get_right_child(self):
         return self.right_child
 
+    def pre_order(self):
+        """
+        实现为一个外部函数更好
+        :return:
+        """
+        print(self.key)
+        if self.left_child:
+            self.left_child.pre_order()
+        if self.right_child:
+            self.right_child.pre_order()
+
+    def post_order(self):
+        if self.left_child:
+            self.left_child.post_order()
+        if self.right_child:
+            self.right_child.post_order()
+        print(self.key)
+
+    def in_order(self):
+        if self.left_child:
+            self.left_child.in_order()
+        print(self.key)
+        if self.right_child:
+            self.right_child.in_order()
+
 
 def test():
     r = BinaryTree('a')
