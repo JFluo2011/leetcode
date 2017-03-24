@@ -22,6 +22,20 @@ def merge(left, right):
     return result
 
 
+def merge_sort_with_iterative(nums):
+    import collections
+    result, deque = [], collections.deque((nums[len(nums)//2:], nums[:len(nums)//2]))
+    while deque:
+        left, right = deque.popleft()
+        if len(left) <= 1:
+            result += merge(left, right)
+        else:
+            deque.append((left[len(left)//2:], left[:len(right)//2]))
+            deque.append((right[len(right)//2:], right[:len(right)//2]))
+
+    return result
+
+
 def main():
     args = [
         [1, 5, 3, 2, 7, 4, 9, 0],
@@ -32,6 +46,8 @@ def main():
         print(arg)
         result = merge_sort(arg)
         print(result)
+        result1 = merge_sort_with_iterative(arg)
+        print(result1)
 
 
 if __name__ == '__main__':
