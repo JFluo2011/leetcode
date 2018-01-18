@@ -11,19 +11,16 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        if not head or not head.next or not head.next.next:
+        if not head or not head.next:
             return head
         odd = head
-        even = head.next
-        tmp = even
+        tmp = even = head.next
         while even and even.next:
             odd.next = even.next
-            odd = odd.next
+            odd = even.next
             even.next = odd.next
-            even = even.next
-
+            even = odd.next
         odd.next = tmp
-
         return head
 
 
