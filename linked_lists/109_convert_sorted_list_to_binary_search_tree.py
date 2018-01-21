@@ -19,22 +19,24 @@ class Solution:
         :rtype: TreeNode
         """
         # :TODO fixme
-        # if head is None:
-        #     return None
-        # slow = head
-        # fast = head
-        # prev = head
-        # while fast and fast.next:
-        #     prev = slow
-        #     slow = slow.next
-        #     fast = fast.next.next
-        # right = slow.next
-        # prev.next = None
-        # left = right
-        # root = TreeNode(slow.val)
-        # root.left = self.sortedListToBST(left)
-        # root.right = self.sortedListToBST(right)
-        # return root
+        if head is None:
+            return None
+        slow = head
+        fast = head
+        prev = head
+        while fast and fast.next:
+            prev = slow
+            slow = slow.next
+            fast = fast.next.next
+        right = slow.next
+        prev.next = None
+        left = head
+        if slow == left:
+            left = None
+        root = TreeNode(slow.val)
+        root.left = self.sortedListToBST(left)
+        root.right = self.sortedListToBST(right)
+        return root
 
 
 def main():
