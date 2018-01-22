@@ -29,29 +29,42 @@ class ListNode:
 
 
 class Solution:
-    def swapPairs(self, head):
+    def partition(self, head, x):
         """
         :type head: ListNode
+        :type x: int
         :rtype: ListNode
         """
-        node = head
-        while node and node.next:
-            node.val, node.next.val = node.next.val, node.val
-            node = node.next.next
-        return head
+        h1 = l1 = ListNode(0)
+        h2 = l2 = ListNode(0)
+        while head:
+            if head.val < x:
+                l1.next = head
+                l1 = l1.next
+            else:
+                l2.next = head
+                l2 = l2.next
+            head = head.next
+        l2.next = None
+        l1.next = h2.next
+        return h1.next
 
 
 def main():
     test_cases = [
-        [],
-        [1],
-        [1, 2],
-        [1, 2, 3],
-        [1, 2, 3, 4],
-        [1, 2, 3, 4, 5],
+        # ([], 1),
+        # ([1], 0),
+        # ([1], 2),
+        # ([1, 2], 1),
+        # ([2, 1], 2),
+        # ([2, 1], 1),
+        # ([2, 1], 0),
+        # ([1, 2, 3], 1),
+        # ([4, 2, 1, 3], 2),
+        ([1, 4, 3, 2, 5, 2], 3),
     ]
-    for lst in test_cases:
-        print_result(lst, 'swapPairs')
+    for case in test_cases:
+        print_result(case[0], 'partition', case[1])
 
 
 if __name__ == '__main__':

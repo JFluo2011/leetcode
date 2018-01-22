@@ -1,3 +1,26 @@
+def print_result(lst, attr_name, args=None):
+    node = dummy = ListNode(None)
+    for num in lst:
+        node.next = ListNode(num)
+        node = node.next
+
+    solution = Solution()
+    func = solution.__getattribute__(attr_name)
+    if args is None:
+        head = func(dummy.next)
+    else:
+        head = func(dummy.next, args)
+    # results = []
+    # while head:
+    #     results.append(head.val)
+    #     head = head.next
+    # print('{}:'.format(attr_name))
+    # if args is None:
+    #     print('input: {}, output: {}'.format(lst, results))
+    # else:
+    #     print('input: {} {}, output: {}'.format(lst, args, results))
+
+
 # Definition for singly-linked list.
 class ListNode:
     def __init__(self, x):
@@ -5,6 +28,7 @@ class ListNode:
         self.next = None
 
 
+# Definition for a binary tree node.
 class TreeNode:
     def __init__(self, x):
         self.val = x
@@ -18,7 +42,6 @@ class Solution:
         :type head: ListNode
         :rtype: TreeNode
         """
-        # :TODO fixme
         if head is None:
             return None
         slow = head
@@ -40,30 +63,16 @@ class Solution:
 
 
 def main():
-    """
-    []
-    [1]
-    [1, 2]
-    [1, 2, 3]
-    [1, 2, 3, 4]
-    [-10, -3, 0, 5, 9]
-    :return:
-    """
-    a = ListNode(-10)
-    b = ListNode(-3)
-    c = ListNode(0)
-    d = ListNode(5)
-    e = ListNode(9)
-    a.next = b
-    b.next = c
-    c.next = d
-    d.next = e
-
-    solution = Solution()
-    head = solution.sortedListToBST(a)
-    while head:
-        print(head.val)
-        head = head.next
+    test_cases = [
+        [],
+        [1],
+        [1, 2],
+        [1, 2, 3],
+        [1, 2, 3, 4],
+        [-10, -3, 0, 5, 9],
+    ]
+    for lst in test_cases:
+        print_result(lst, 'sortedListToBST')
 
 
 if __name__ == '__main__':

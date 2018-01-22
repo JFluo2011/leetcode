@@ -1,3 +1,26 @@
+def print_result(lst, attr_name, args=None):
+    node = dummy = ListNode(None)
+    for num in lst:
+        node.next = ListNode(num)
+        node = node.next
+
+    solution = Solution()
+    func = solution.__getattribute__(attr_name)
+    if args is None:
+        head = func(dummy.next)
+    else:
+        head = func(dummy.next, args)
+    results = []
+    while head:
+        results.append(head.val)
+        head = head.next
+    print('{}:'.format(attr_name))
+    if args is None:
+        print('input: {}, output: {}'.format(lst, results))
+    else:
+        print('input: {} {}, output: {}'.format(lst, args, results))
+
+
 # Definition for singly-linked list.
 class ListNode(object):
     def __init__(self, x):
@@ -25,35 +48,15 @@ class Solution(object):
 
 
 def main():
-    """
-    []
-    [1]
-    [1, 2]
-    [1, 2, 3]
-    [1,2,3,4,5,6,7,8]
-    :return:
-    """
-    a = ListNode(1)
-    b = ListNode(2)
-    c = ListNode(3)
-    d = ListNode(4)
-    e = ListNode(5)
-    f = ListNode(6)
-    g = ListNode(7)
-    h = ListNode(8)
-    a.next = b
-    b.next = c
-    c.next = d
-    d.next = e
-    e.next = f
-    f.next = g
-    g.next = h
-
-    solution = Solution()
-    head = solution.oddEvenList(a)
-    while head:
-        print(head.val)
-        head = head.next
+    test_cases = [
+        [],
+        [1],
+        [1, 2],
+        [1, 2, 3],
+        [1, 2, 3, 4, 5, 6, 7, 8],
+    ]
+    for lst in test_cases:
+        print_result(lst, 'oddEvenList')
 
 
 if __name__ == '__main__':
