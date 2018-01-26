@@ -29,43 +29,38 @@ class ListNode:
 
 
 class Solution:
-    def reverseBetween(self, head, m, n):
+    def detectCycle(self, head):
         """
         :type head: ListNode
-        :type m: int
-        :type n: int
         :rtype: ListNode
         """
-        dummy = ListNode(None)
-        dummy.next = head
-        prev = dummy
-        for _ in range(m-1):
-            prev = prev.next
-        reverse = None
-        cur = prev.next
-        for _ in range(n-m+1):
-            next_ = cur.next
-            cur.next = reverse
-            reverse = cur
-            cur = next_
+        fast, slow = head, head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
 
-        prev.next.next = cur
-        prev.next = reverse
+            if fast == slow:
+                break
+        else:
+            return None
 
-        return dummy.next
+        while slow != head:
+            slow = slow.next
+            head = head.next
+        return head
 
 
 def main():
     test_cases = [
-        # ([2], 1, 1),
-        ([3, 5], 1, 2),
-        # ([4, 2, 1, 3], 1, 1),
-        # ([1, 2, 3, 4, 5], 2, 4),
-        # ([1, 2, 3, 4, 5], 2, 5),
-        ([1, 2, 3, 4, 5, 6, 7, 8], 2, 6),
+        # [],
+        # [1],
+        # [1, 2],
+        # [1, 2, 3],
+        # [1, 2, 3, 4],
+        [1, 3, 2, 5, 4, 2],
     ]
     for case in test_cases:
-        print_result(case[0], 'reverseBetween', case[1], case[2])
+        print_result(case, 'detectCycle')
 
 
 if __name__ == '__main__':
