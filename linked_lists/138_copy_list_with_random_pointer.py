@@ -30,38 +30,75 @@ class RandomListNode(object):
 
 
 class Solution:
+    # def copyRandomList(self, head):
+    #     """
+    #     :type head: RandomListNode
+    #     :rtype: RandomListNode
+    #     """
+    #     node = head
+    #     # copy node: A->A'->B->B'->C->C'
+    #     while node:
+    #         tmp = RandomListNode(node.label)
+    #         tmp.next = node.next
+    #         node.next = tmp
+    #         node = tmp.next
+    #     # set A', B', C' random
+    #     node = head
+    #     while node:
+    #         node.next.random = node.random and node.random.next
+    #         node = node.next.next
+    #     # split list: A->B->C, A'->B'->C'
+    #     node = head
+    #     dummy1 = RandomListNode(0)
+    #     dummy2 = RandomListNode(0)
+    #     l1, l2 = dummy1, dummy2
+    #     while node:
+    #         # node.next = node = copy_.next
+    #         l1.next, l2.next = node, node.next
+    #         l1, l2 = l1.next, l2.next
+    #         node = node.next.next
+    #     else:
+    #         l1.next = None
+    #
+    #     # return dummy1.next  # original list
+    #     return dummy2.next
+
     def copyRandomList(self, head):
         """
         :type head: RandomListNode
         :rtype: RandomListNode
         """
+        if head is None:
+            return head
         node = head
         # copy node: A->A'->B->B'->C->C'
         while node:
-            tmp = RandomListNode(node.label*10)
-            tmp.next = node.next
-            node.next = tmp
-            node = tmp.next
+            clone = RandomListNode(node.label)
+            clone.next = node.next
+            node.next = clone
+            node = clone.next
         # set A', B', C' random
         node = head
         while node:
-            node.next.random = node.random and node.random.next
-            node = node.next.next
+            clone = node.next
+            if node.random:
+                clone.random = node.random.next
+            node = clone.next
         # split list: A->B->C, A'->B'->C'
         node = head
-        dummy1 = RandomListNode(0)
-        dummy2 = RandomListNode(0)
-        l1, l2 = dummy1, dummy2
+        # dummy1 = RandomListNode(0)
+        # dummy2 = RandomListNode(0)
+        # l1, l2 = dummy1, dummy2
+        clone = ph = node.next
         while node:
-            # node.next = node = copy_.next
-            l1.next, l2.next = node, node.next
-            l1, l2 = l1.next, l2.next
-            node = node.next.next
-        else:
-            l1.next = None
+            node.next = clone.next
+            node = node.next
+            if node:
+                clone.next = node.next
+                clone = clone.next
 
         # return dummy1.next  # original list
-        return dummy2.next
+        return ph
 
 
 def main():
