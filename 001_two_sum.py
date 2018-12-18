@@ -8,7 +8,7 @@ class Solution(object):
         temp_nums = sorted(nums)
         index_list = self.sum(temp_nums, 0, len(temp_nums)-1, target)
         if index_list[0] == index_list[1]:
-            return [i for (i,j) in enumerate(nums) if index_list[0] == j][:2]
+            return [i for (i, j) in enumerate(nums) if index_list[0] == j][:2]
         else:
             return [nums.index(i) for i in index_list]
 
