@@ -1,14 +1,15 @@
+from data_structures.helper import time_cal
+
+
+@time_cal
 def selection_sort(nums):
-    print('*'*30)
-    print(nums)
     for i in range(len(nums)):
-        index = i
+        k = i
         for j in range(i+1, len(nums)):
-            if nums[index] > nums[j]:
-                index = j
-        nums[i], nums[index] = nums[index], nums[i]
-        print(nums)
-    print('*'*30)
+            if nums[k] > nums[j]:
+                k = j
+        nums[i], nums[k] = nums[k], nums[i]
+    return nums
 
 
 def main():

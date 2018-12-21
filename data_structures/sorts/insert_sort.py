@@ -1,16 +1,18 @@
+from data_structures.helper import time_cal
+
+
+@time_cal
 def insert_sort(nums):
-    print('*'*30)
-    print(nums)
     for i in range(1, len(nums)):
-        index, temp = i, nums[i]
-        for j in range(i - 1, -1, -1):
-            if temp < nums[j]:
-                nums[j+1], index = nums[j], j
+        k, tmp = i, nums[i]
+        for j in range(i, 0, -1):
+            if nums[j] < nums[j - 1]:
+                k, nums[k] = j - 1, nums[j]
             else:
                 break
-        nums[index] = temp
-        print(nums)
-    print('*'*30)
+        nums[k] = tmp
+
+    return nums
 
 
 def main():
