@@ -34,25 +34,20 @@ def _merge(l, r):
 
 
 @time_cal
-
-
-
 def merge_sort_with_iterative(nums):
-    import collections
-    result, deque = [], collections.deque((nums[len(nums)//2:], nums[:len(nums)//2]))
-    while deque:
-        left, right = deque.popleft()
-        if len(left) <= 1:
-            result += _merge(left, right)
-        else:
-            deque.append((left[len(left)//2:], left[:len(right)//2]))
-            deque.append((right[len(right)//2:], right[:len(right)//2]))
+    i, length = 1, len(nums)
+    while i < length:
+        j = 0
+        while j < length:
+            nums[j:min(length, j+2*i)] = _merge(nums[j:j+i], nums[j+i: min(length, j+2*i)])
+            j += 2*i
+        i += i
 
-    return result
+    return nums
 
 
 def main():
-    nums = gen_random_numbers(10000)
+    nums = gen_random_numbers(10000, 1, 10001)
     nums = merge_sort(nums)
     assert is_sorted(nums)
 

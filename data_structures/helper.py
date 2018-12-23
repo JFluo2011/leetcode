@@ -2,12 +2,12 @@ from random import randint
 import time
 
 
-def gen_random_numbers(count):
-    return [randint(1, count+1) for _ in range(count)]
+def gen_random_numbers(count, s, e):
+    return [randint(s, e) for _ in range(count)]
 
 
 def gen_reverse_order_numbers(count):
-    return [_ for _ in range(count+1, 0, -1)]
+    return [_ for _ in range(count, 0, -1)]
 
 
 def gen_nearly_order_numbers(count, swap_times):
