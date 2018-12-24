@@ -2,6 +2,10 @@ from random import randint
 import time
 
 
+class EmptyError(Exception):
+    pass
+
+
 def gen_random_numbers(count, s, e):
     return [randint(s, e) for _ in range(count)]
 
@@ -34,3 +38,10 @@ def time_cal(func):
         print(f'{func.__name__} time cost: {time.time() - start}')
         return result
     return decorator
+
+
+def sort_nums(args_lst, length):
+    for func, nums in args_lst:
+        nums = func(nums)
+        assert len(nums) == length
+        assert is_sorted(nums)
