@@ -1,12 +1,12 @@
 from copy import deepcopy
 
 from data_structures.helper import time_cal, gen_random_numbers, gen_reverse_order_numbers, gen_nearly_order_numbers, sort_nums
-from data_structures.sorts.heap import HeapMin
+from data_structures.sorts.libs.heap import MinHeap
 
 
 @time_cal
 def heap_sort1(nums):
-    heap = HeapMin()
+    heap = MinHeap()
     for item in nums:
         heap.insert(item)
 
@@ -15,7 +15,7 @@ def heap_sort1(nums):
 
 @time_cal
 def heap_sort2(nums):
-    heap = HeapMin()
+    heap = MinHeap()
     heap.heapify(nums)
 
     return [heap.pop() for _ in range(len(nums))]
