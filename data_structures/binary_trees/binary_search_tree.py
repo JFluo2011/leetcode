@@ -1,7 +1,71 @@
 import unittest
 
 
-class TreeNode:
+class Node:
+    def __init__(self, key, val):
+        self.key = key
+        self.val = val
+        self.left = None
+        self.right = None
+
+
+class BinarySearchTree:
+    """
+    1、floor: key的前一个节点
+    2、ceil: key的后一个节点
+    3、rank: key的排名（每个节点多存一个值--节点下有多少个节点，包括自身）
+    4、select: 排名第n的元素
+    5、支持重复元素：在node中增加一个值，存储每个key有多少个
+    """
+    def __init__(self):
+        self.count = 0
+        self.root = None
+
+    def pre_order(self):
+        pass
+
+    def in_order(self):
+        pass
+
+    def post_order(self):
+        pass
+
+    def level_order(self):
+        pass
+
+    def size(self):
+        return self.count
+
+    def empty(self):
+        return self.count == 0
+
+    def insert(self):
+        pass
+
+    def remove(self, key):
+        # 找到前驱后继
+        pass
+
+    def remove_min(self):
+        pass
+
+    def remove_max(self):
+        pass
+
+    def contain(self, key):
+        pass
+
+    def search(self, key):
+        pass
+
+    def min(self):
+        pass
+
+    def max(self):
+        pass
+
+
+class TreeNode1:
     def __init__(self, key, val, left=None, right=None, parent=None):
         self.key = key
         self.val = val
@@ -83,7 +147,7 @@ class TreeNode:
                 yield elem
 
 
-class BinarySearchTree:
+class BinarySearchTree1:
     def __init__(self):
         self.root = None
         self.size = 0
@@ -99,7 +163,7 @@ class BinarySearchTree:
 
     def put(self, key, val):
         if not self.root:
-            self.root = TreeNode(key=key, val=val)
+            self.root = TreeNode1(key=key, val=val)
         else:
             self._put(key, val, self.root)
         self.size += 1
@@ -109,12 +173,12 @@ class BinarySearchTree:
             if current_node.has_left_child():
                 self._put(key, val, current_node.left_child)
             else:
-                current_node.left_child = TreeNode(key, val, parent=current_node)
+                current_node.left_child = TreeNode1(key, val, parent=current_node)
         else:
             if current_node.has_right_child():
                 self._put(key, val, current_node.right_child)
             else:
-                current_node.right_child = TreeNode(key, val, parent=current_node)
+                current_node.right_child = TreeNode1(key, val, parent=current_node)
 
     def __setitem__(self, key, value):
         self.put(key=key, val=value)
@@ -201,19 +265,19 @@ class BinarySearchTree:
         self.delete(key)
 
 
-class AVLTree(BinarySearchTree):
+class AVLTree(BinarySearchTree1):
     def _put(self, key, val, current_node):
         if current_node.key > key:
             if current_node.has_left_child():
                 self._put(key, val, current_node.left_child)
             else:
-                current_node.left_child = TreeNode(key, val, parent=current_node)
+                current_node.left_child = TreeNode1(key, val, parent=current_node)
                 self.update_balance(current_node.left_child)
         else:
             if current_node.has_right_child():
                 self._put(key, val, current_node.right_child)
             else:
-                current_node.right_child = TreeNode(key, val, parent=current_node)
+                current_node.right_child = TreeNode1(key, val, parent=current_node)
                 self.update_balance(current_node.right_child)
 
     def update_balance(self, node):
@@ -278,7 +342,7 @@ class AVLTree(BinarySearchTree):
 
 
 def delete_tree(key):
-    mytree = BinarySearchTree()
+    mytree = BinarySearchTree1()
     mytree[17] = 1
     mytree[18] = 6
     mytree[5] = 2
